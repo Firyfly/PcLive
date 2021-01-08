@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8248436119886298206}
   m_Layer: 0
   m_Name: Block1
-  m_TagString: Ice
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -140,4 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parent: {fileID: 6972637335732428456}
   onConveyor: 0
+  onConveyorEnd: 0
   pickup: {fileID: 0}
+  blockCreation: {fileID: 0}
+  logicManager: {fileID: 0}

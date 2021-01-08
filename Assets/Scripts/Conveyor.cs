@@ -34,7 +34,7 @@ public class Conveyor : MonoBehaviour
             
             if (logicManager.coolingAmount > 1 && logicManager.energyAmount > 1) {
                 Invoke("DestroyBlock", 5);
-                
+                Debug.Log("ist drinnen");
                 logicManager.DecreaseCooling();
                 logicManager.DecreaseEnergy();
             }
@@ -56,7 +56,7 @@ public class Conveyor : MonoBehaviour
             Debug.Log("Test, sollte kommen");
 
         }
-
+       
 
         if (other.tag == "Conveyor")
         {
