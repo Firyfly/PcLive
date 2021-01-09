@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LabyrinthManager : MonoBehaviour
 {
@@ -13,10 +14,13 @@ public class LabyrinthManager : MonoBehaviour
     public GameObject blackbox;
     public GameObject player;
     public bool endingFinished = false;
-    public int time;
+    public float time;
     public CoinManager coinManager;
     public GameObject labyrinth;
     public LogicManager logicManager;
+    public bool timerActive = false;
+    public Text timeText;
+    public GameObject timeTextObject;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +29,8 @@ public class LabyrinthManager : MonoBehaviour
         player = GameObject.Find("Player");
         coinManager = GameObject.Find("CoinManager").GetComponent<CoinManager>();
         logicManager = GameObject.Find("LogicManager").GetComponent<LogicManager>();
+        timeTextObject = GameObject.Find("Time");
+        timeTextObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -32,7 +38,28 @@ public class LabyrinthManager : MonoBehaviour
     {
      
         
+        if(timerActive == true)
+        {
+            timeTextObject.SetActive(true);
+            timeText.text = "Time left:" + Mathf.Round(time*10f)/10f;
+            if (time > 0)
+            {
+                time -= Time.deltaTime;
+            }
+            else
+            {
+                if (endingFinished == false)
+                {
+                    player.transform.position = new Vector3(-14, 20, 10);
+                    blackbox.SetActive(true);
+                    timerActive =false;
+                    timeTextObject.SetActive(false);
+                }
+            }
 
+
+
+        }
 
 
 
@@ -72,7 +99,7 @@ public class LabyrinthManager : MonoBehaviour
         blackbox.SetActive(false);
         outerDoor.SetActive(true);
         innerDoor.SetActive(false);
-        Timer();
+        timerActive = true;
 
     }
 
@@ -94,26 +121,9 @@ public class LabyrinthManager : MonoBehaviour
             endingFinished = true;
             blackbox.SetActive(true);
             logicManager.AddEnergy();
-
-           
+            timerActive = false;
+            timeTextObject.SetActive(false);
         }
-    }
-
-    public void Timer()
-    {
-
-        if (time > 2)
-        {
-            Invoke("Timer",2);
-        }
-        else if (endingFinished == false)
-        {
-            player.transform.position = new Vector3(-14, 20, 10);
-            blackbox.SetActive(true);
-            
-        }
-
-        time -= 1;
     }
     
 }

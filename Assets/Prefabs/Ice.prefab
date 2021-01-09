@@ -141,3 +141,9 @@ MonoBehaviour:
   parent: {fileID: 1349844330971315571}
   onTrigger: 0
   shrinkRate: -1
+  pickup: {fileID: 0}
+  iceCreation: {fileID: 0}
+  logicManager: {fileID: 0}
+  cooler: {fileID: 0}
+  coolerObject: {fileID: 0}
+  child: {fileID: 1349844330971315571}
