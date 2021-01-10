@@ -13,7 +13,10 @@ public class PickUp : MonoBehaviour
     void Start()
     {
         holdDestination = GameObject.Find("Player").transform.Find("HoldDestination");
-        meltBlock = this.GetComponent<MeltBlock>();
+        if (this.tag == "Ice")
+        {
+            meltBlock = this.GetComponent<MeltBlock>();
+        }
     }
 
     // Update is called once per frame
@@ -24,11 +27,14 @@ public class PickUp : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (meltBlock.onTrigger == true)
+        if (this.tag == "Ice")
         {
-            meltBlock.onTrigger = false;
-            meltBlock.child.transform.parent = null;
-            meltBlock.isParent = false;
+            if (meltBlock.onTrigger == true)
+            {
+                meltBlock.onTrigger = false;
+                meltBlock.child.transform.parent = null;
+                meltBlock.isParent = false;
+            }
         }
 
         this.transform.position = holdDestination.position;

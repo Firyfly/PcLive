@@ -6,6 +6,7 @@ public class FollowPlayerZAxis : MonoBehaviour
 {
 
     private GameObject player;
+    public Transform playerTransform;
     public bool once = false;
 
 
@@ -13,13 +14,15 @@ public class FollowPlayerZAxis : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player");
+        playerTransform = player.transform;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //this.transform.LookAt(playerTransform);
 
-        if(player.transform.position.y > 28 && once == false && player.transform.position.z > 13.7 && player.transform.position.y <= 50)
+        if (player.transform.position.y > 28 && once == false && player.transform.position.z > 13.7 && player.transform.position.y <= 50)
         {
             transform.Rotate(-20, 0, 0);
             once = true;
