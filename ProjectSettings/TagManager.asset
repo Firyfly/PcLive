@@ -16,6 +16,9 @@ TagManager:
   - Ending
   - Conveyor
   - ConveyorEnd
+  - GPUMaschine
+  - Block1
+  - Block0
   layers:
   - Default
   - TransparentFX

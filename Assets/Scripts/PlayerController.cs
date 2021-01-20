@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
 
     public CubeManager cubeManager;
     public LabyrinthManager labyrinthManager;
+    public FollowPlayerZAxis followPlayerZAxis;
 
 
     public Vector3 moveUp;
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
     {
        cubeManager = GameObject.Find("CubeManager").GetComponent<CubeManager>();
         labyrinthManager = GameObject.Find("LabyrinthManager").GetComponent<LabyrinthManager>();
+        followPlayerZAxis = GameObject.Find("MainCamera").GetComponent<FollowPlayerZAxis>();
 
 
        moveUp = new Vector3(0, 1, 0);
@@ -66,6 +68,19 @@ public class PlayerController : MonoBehaviour
 
         labyrinthManager.InteractLabyrinth(other);
 
+        if (other.tag == "GPUMaschine")
+        {
+            followPlayerZAxis.enter = true;
+        }
+
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "GPUMaschine")
+        {
+            followPlayerZAxis.exit = true;
+        }
     }
 
 

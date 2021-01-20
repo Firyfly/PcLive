@@ -10,6 +10,9 @@ public class Conveyor : MonoBehaviour
     public PickUp pickup;
     public BlockCreation blockCreation;
     public LogicManager logicManager;
+    public BinaryManager binaryManager;
+
+    public bool destroying = false;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +20,7 @@ public class Conveyor : MonoBehaviour
         pickup = this.GetComponent<PickUp>();
         blockCreation = GameObject.Find("BlockGenerator0").GetComponent<BlockCreation>();
         logicManager = GameObject.Find("LogicManager").GetComponent<LogicManager>();
+        binaryManager = GameObject.Find("BinaryManager").GetComponent<BinaryManager>();
     }
 
     // Update is called once per frame
@@ -31,12 +35,15 @@ public class Conveyor : MonoBehaviour
         }
         if(onConveyorEnd == true)
         {
-            
+           
             if (logicManager.coolingAmount > 1 && logicManager.energyAmount > 1) {
-                Invoke("DestroyBlock", 5);
-                Debug.Log("ist drinnen");
-                logicManager.DecreaseCooling();
-                logicManager.DecreaseEnergy();
+                if (destroying == false)
+                {
+                    Invoke("DestroyBlock", 5);
+                   
+                    destroying = true;
+                }
+
             }
         }
 
@@ -53,14 +60,14 @@ public class Conveyor : MonoBehaviour
         {
 
             onConveyorEnd = true;
-            Debug.Log("Test, sollte kommen");
+            
 
         }
        
 
         if (other.tag == "Conveyor")
         {
-            Debug.Log("Jo");
+      
             onConveyor = true;
 
         }
@@ -89,8 +96,19 @@ public class Conveyor : MonoBehaviour
 
     public void DestroyBlock()
     {
+        if(parent.tag == "Block1")
+        {
+            binaryManager.BlockCheck(1);
+        }
+        else
+        {
+            binaryManager.BlockCheck(0);
+        }
         Destroy(parent);
         blockCreation.objectCount -= 1;
+        logicManager.DecreaseCooling();
+        logicManager.DecreaseEnergy();
+        destroying = false;
     }
 
 

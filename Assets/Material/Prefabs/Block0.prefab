@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 6154183450040132288}
   m_Layer: 0
   m_Name: Block0
-  m_TagString: Untagged
+  m_TagString: Block0
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1d3b0a1f07c71ea47ab964a4f280babf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -126,6 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   holdDestination: {fileID: 0}
   hold: 0
+  meltBlock: {fileID: 0}
 --- !u!114 &6154183450040132288
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -144,3 +145,5 @@ MonoBehaviour:
   pickup: {fileID: 0}
   blockCreation: {fileID: 0}
   logicManager: {fileID: 0}
+  binaryManager: {fileID: 0}
+  destroying: 0

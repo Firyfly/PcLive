@@ -13,6 +13,17 @@ public class CubeManager : MonoBehaviour
     public GameObject mainLight;
     public LabyrinthManager labyrinthManager;
 
+    //public bool front = true;
+    //public bool left = false;
+    //public bool right = false;
+
+    public float minAngle;
+    public float maxAngle;
+
+    public bool rotating = false;
+
+    public float angle = 0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,12 +35,34 @@ public class CubeManager : MonoBehaviour
         playerRb = GameObject.Find("Player").GetComponent<Rigidbody>();
         mainCamera = GameObject.Find("MainCamera");
         mainLight = GameObject.Find("MainLight");
+        
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        
+
+        //if(rotating == true)
+        //{
+
+        //    Debug.Log(minAngle);
+        //    Debug.Log(maxAngle);
+            
+        //    angle = Mathf.LerpAngle(minAngle, maxAngle, Time.time / 4f);
+        //    mainCamera.transform.eulerAngles = new Vector3(0, angle, 0);
+
+        //    Debug.Log(angle);
+
+        //    if (angle == maxAngle)
+        //    {
+        //        rotating = false;
+        //        Debug.Log("Done");
+        //    }
+        //}
+
+
+
+
     }
 
 
@@ -38,7 +71,14 @@ public class CubeManager : MonoBehaviour
 
         if(other.tag == "SlopeOneTwo")
         {
-            mainCamera.transform.Rotate(0, -90, 0);
+
+
+            //minAngle = 0;
+            //maxAngle = -90;
+
+            //rotating = true;
+
+
             mainLight.transform.Rotate(0, -90, 0);
 
             player.transform.Rotate(0, 0, -90);
@@ -56,7 +96,12 @@ public class CubeManager : MonoBehaviour
 
         if (other.tag == "SlopeTwoOne")
         {
-            mainCamera.transform.Rotate(0, 90, 0);
+
+            //minAngle = -90;
+            //maxAngle = 0;
+
+            //rotating = true;
+
             mainLight.transform.Rotate(0, 90, 0);
 
             player.transform.Rotate(0, 0, 90);

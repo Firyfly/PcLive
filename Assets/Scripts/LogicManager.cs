@@ -21,7 +21,8 @@ public class LogicManager : MonoBehaviour
     void Start()
     {
         coolingAmount = 30;
-        InvokeRepeating("DecreaseEnergy", 5f, 10f);
+        energyAmount = 30;
+        InvokeRepeating("DecreaseEnergySlightly", 5f, 10f);
         InvokeRepeating("AddCoolingSlightly", 5f, 1f);
     }
 
@@ -42,7 +43,7 @@ public class LogicManager : MonoBehaviour
     }
 
 
-    public void DecreaseEnergy()
+    public void DecreaseEnergySlightly()
     {
         if (energyAmount > 0)
         {
@@ -52,6 +53,20 @@ public class LogicManager : MonoBehaviour
         {
             energyAmount = 0;
         }
+    }
+
+    public void DecreaseEnergy()
+    {
+
+        if (energyAmount > 0)
+        {
+            energyAmount -= 5;
+        }
+        else
+        {
+            energyAmount = 0;
+        }
+
     }
 
     public void AddEnergy()
@@ -70,7 +85,7 @@ public class LogicManager : MonoBehaviour
     {
         if (coolingAmount > 0)
         {
-            coolingAmount -= 1;
+            coolingAmount -= 5;
         }
         else
         {
