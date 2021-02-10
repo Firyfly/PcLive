@@ -21,11 +21,14 @@ public class FollowPlayerZAxis : MonoBehaviour
     public float yaw = 0.0f;
     public float pitch = 0.0f;
 
+    public LookAtMouse lookAtMouse;
+
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.Find("Player");
         playerTransform = player.transform;
+        lookAtMouse = GameObject.Find("Player").GetComponent<LookAtMouse>();
     }
 
     // Update is called once per frame
@@ -92,7 +95,19 @@ public class FollowPlayerZAxis : MonoBehaviour
         {
             if (lookingAtPlayer == false)
             {
-                this.transform.rotation= new Quaternion(0, 0, 0,0);
+                if (lookAtMouse.cubeSide == 1)
+                {
+                    this.transform.rotation = new Quaternion(0, 0, 0, 0);
+                }
+                if (lookAtMouse.cubeSide == 2)
+                {
+                    Debug.Log(this.transform.rotation.y);
+                    this.transform.rotation = new Quaternion(0, -0.5f, 0, 0.5f);
+                }
+                if (lookAtMouse.cubeSide == 3)
+                {
+                    this.transform.rotation = new Quaternion(0, 0.5f, 0, 0.5f);
+                }
                 transform.position = new Vector3(0, player.transform.position.y, 0);
                 lookingAtPlayer = true;
             }

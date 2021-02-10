@@ -166,6 +166,7 @@ MonoBehaviour:
   moveDown: {x: 0, y: 0, z: 0}
   moveLeft: {x: 0, y: 0, z: 0}
   moveRight: {x: 0, y: 0, z: 0}
+  cpuUpgradeMaschine: {fileID: 0}
 --- !u!136 &3926800
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1642,6 +1643,7 @@ GameObject:
   - component: {fileID: 349159537}
   - component: {fileID: 349159536}
   - component: {fileID: 349159535}
+  - component: {fileID: 349159539}
   m_Layer: 0
   m_Name: CoolingUpgradeMaschine
   m_TagString: CoolingUpgradeMaschine
@@ -1723,6 +1725,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 46
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+--- !u!114 &349159539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349159534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66cfb7492c3049a4abe8f45c473da28b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeLevel: 0
+  upgradeCost: 10
+  coinManager: {fileID: 0}
 --- !u!1 &353338913
 GameObject:
   m_ObjectHideFlags: 0
@@ -3867,6 +3884,7 @@ MonoBehaviour:
   coolingMaximum: 120
   enoughEnergy: 1
   enoughHeat: 1
+  coinManager: {fileID: 0}
 --- !u!4 &780589804
 Transform:
   m_ObjectHideFlags: 0
@@ -8431,6 +8449,7 @@ GameObject:
   - component: {fileID: 1654720798}
   - component: {fileID: 1654720797}
   - component: {fileID: 1654720796}
+  - component: {fileID: 1654720800}
   m_Layer: 0
   m_Name: EnergyUpgradeMaschine
   m_TagString: EnergyUpgradeMaschine
@@ -8512,6 +8531,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 47
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
+--- !u!114 &1654720800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1654720795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 569b84141deeac44c91b243b79ba7c95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeLevel: 0
+  upgradeCost: 10
+  coinManager: {fileID: 0}
 --- !u!1 &1669778701
 GameObject:
   m_ObjectHideFlags: 0
@@ -9260,6 +9294,7 @@ GameObject:
   - component: {fileID: 1879736403}
   - component: {fileID: 1879736402}
   - component: {fileID: 1879736401}
+  - component: {fileID: 1879736405}
   m_Layer: 0
   m_Name: CPUUpgradeMaschine
   m_TagString: CPUUpgradeMaschine
@@ -9278,8 +9313,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.5880575, z: 1}
-  m_Center: {x: 0, y: -0.29402876, z: 0}
+  m_Size: {x: 1.5191368, y: 1.8468904, z: 1}
+  m_Center: {x: 0.020993393, y: -0.42344522, z: 0}
 --- !u!23 &1879736402
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9341,6 +9376,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 45
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1879736405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1879736400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ab60a01c4222754984bb15ef52bf7ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeLevel: 0
+  upgradeCost: 10
+  binaryManager: {fileID: 0}
+  conveyor: {fileID: 0}
+  coinManager: {fileID: 0}
 --- !u!1 &1896059272
 GameObject:
   m_ObjectHideFlags: 0
@@ -9867,6 +9919,8 @@ MonoBehaviour:
   initialised: 0
   currentCheckBlock: 0
   coinManager: {fileID: 0}
+  cpuCoinReward: 5
+  cpuDestroyBlockTime: 5
 --- !u!4 &1950045779
 Transform:
   m_ObjectHideFlags: 0
@@ -10742,6 +10796,7 @@ MonoBehaviour:
   speedV: 2
   yaw: 0
   pitch: 0
+  lookAtMouse: {fileID: 0}
 --- !u!114 &2027780578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10757,6 +10812,7 @@ MonoBehaviour:
   rotating: 0
   minAngle: 0
   maxAngle: 0
+  lerpTime: 2
 --- !u!114 &2027780579
 MonoBehaviour:
   m_ObjectHideFlags: 0
