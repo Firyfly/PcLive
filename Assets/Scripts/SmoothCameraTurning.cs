@@ -5,39 +5,93 @@ using UnityEngine;
 public class SmoothCameraTurning : MonoBehaviour
 {
 
-    public bool rotate = false;
+    public bool rotating = false;
 
 
-    float minAngle = -90.0f;
-    float maxAngle = 90.0f;
+    public float minAngle = 0;
+    public float maxAngle = 0;
+
+    
+    public float lerpTime = 1.2f;
+    static float t = 0.0f;
+
+    private void Start()
+    {
+        
+    }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+    
+
+
+
+        if (rotating == true)
         {
-            rotate = true;
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            minAngle = 90;
-            maxAngle = 0;
-            rotate = true;
-        }
-        if (rotate == true)
-        {
-            float angle = Mathf.LerpAngle(minAngle, maxAngle, Time.time/3f);
+
+
+            float angle = Mathf.LerpAngle(minAngle, maxAngle, t);
             transform.eulerAngles = new Vector3(0, angle, 0);
-            if(angle == maxAngle)
+
+            t += lerpTime * Time.deltaTime;
+        
+
+            if (t >= 1.0f)
             {
-                rotate = false;
+                rotating = false;
+                t = 0;
             }
+            
         }
+
+
+
+
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    minAngle = 0.0f;
+        //    maxAngle = 90.0f;
+        //    rotating = true;
+        //}
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    minAngle = 40;
+        //    maxAngle = -90f;
+        //    rotating = true;
+        //}
+        //if (rotating == true)
+        //{
+        //    float angle = Mathf.LerpAngle(minAngle, maxAngle, Time.time/1.5f);
+        //    transform.eulerAngles = new Vector3(0, angle, 0);
+        //    if(angle == maxAngle)
+        //    {
+        //        rotating = false;
+        //    }
+        //}
     }
 
 
+    //public void TurnSmooth(float min, float max)
+    //{
+    //    if (rotating == true)
+    //    {
+    //        StartCoroutine(TurnNow(min, max));
+    //    }
+    //}
 
+    //IEnumerator TurnNow(float min,float max)
+    //{
+    //    do {
+    //        angle = Mathf.LerpAngle(minAngle, maxAngle, Time.time / 1.5f);
+    //        transform.eulerAngles = new Vector3(0, angle, 0);
+    //        if (angle == maxAngle)
+    //        {
+    //            rotating = false;
+    //        }
+    //    } while(angle == maxAngle || counter);
 
-
+    //    yield return null;
+    //}
 
 
 

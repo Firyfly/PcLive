@@ -15,11 +15,12 @@ public class PlayerController : MonoBehaviour
     public LabyrinthManager labyrinthManager;
     public FollowPlayerZAxis followPlayerZAxis;
 
-
     public Vector3 moveUp;
     public Vector3 moveDown;
     public Vector3 moveLeft;
     public Vector3 moveRight;
+
+    public CPUUpgradeMaschine cpuUpgradeMaschine;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +28,8 @@ public class PlayerController : MonoBehaviour
        cubeManager = GameObject.Find("CubeManager").GetComponent<CubeManager>();
         labyrinthManager = GameObject.Find("LabyrinthManager").GetComponent<LabyrinthManager>();
         followPlayerZAxis = GameObject.Find("MainCamera").GetComponent<FollowPlayerZAxis>();
+
+        cpuUpgradeMaschine = GameObject.Find("CPUUpgradeMaschine").GetComponent<CPUUpgradeMaschine>();
 
 
        moveUp = new Vector3(0, 1, 0);
@@ -81,6 +84,24 @@ public class PlayerController : MonoBehaviour
         {
             followPlayerZAxis.exit = true;
         }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+
+            if(other.tag == "CPUUpgradeMaschine")
+            {
+                cpuUpgradeMaschine.CPUUpgrade();
+            }
+
+
+        }
+
+
+
     }
 
 

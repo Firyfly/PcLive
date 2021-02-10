@@ -24,6 +24,9 @@ public class BinaryManager : MonoBehaviour
 
     public CoinManager coinManager;
 
+    public float cpuCoinReward = 5;
+    public float cpuDestroyBlockTime = 5;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -134,7 +137,7 @@ public class BinaryManager : MonoBehaviour
             {
                 //Ende der Check und reset
                 Invoke("ResetBinaries", 1f);
-                coinManager.coins += 20;
+                coinManager.coins += cpuCoinReward;
 
 
             }

@@ -15,15 +15,30 @@ public class LogicManager : MonoBehaviour
     public bool enoughEnergy = true;
     public bool enoughHeat = true;
 
-
+    public CoinManager coinManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        coolingAmount = 30;
-        energyAmount = 30;
+
+        if (PlayerPrefs.GetInt("Once") == 0)
+        {
+            coolingAmount = 30;
+            energyAmount = 30;
+            PlayerPrefs.SetInt("Once", 1);
+        }
+        else
+        {
+            coolingAmount = PlayerPrefs.GetFloat("Cooling");
+            energyAmount = PlayerPrefs.GetFloat("Energy");
+        }
+
+
         InvokeRepeating("DecreaseEnergySlightly", 5f, 10f);
         InvokeRepeating("AddCoolingSlightly", 5f, 1f);
+        InvokeRepeating("SaveStatesOfLogic", 5f, 10f);
+
+        coinManager = GameObject.Find("CoinManager").GetComponent<CoinManager>();
     }
 
     // Update is called once per frame
@@ -119,7 +134,12 @@ public class LogicManager : MonoBehaviour
 
     }
 
-
+    public void SaveStatesOfLogic()
+    {
+        PlayerPrefs.SetFloat("Energy",energyAmount);
+        PlayerPrefs.SetFloat("Cooling",coolingAmount);
+        PlayerPrefs.SetFloat("BitCoins",coinManager.coins);
+    }
 
 
 

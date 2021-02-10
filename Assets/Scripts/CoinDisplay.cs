@@ -21,7 +21,7 @@ public class CoinDisplay : MonoBehaviour
     {
         showCoins = Mathf.RoundToInt(coinManager.coins);
 
-        coinsText.text = "Coins: " + showCoins;
+        coinsText.text = "Bitcoins: " + showCoins;
 
     }
 }

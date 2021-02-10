@@ -8,17 +8,21 @@ public class Conveyor : MonoBehaviour
     public bool onConveyor = false;
     public bool onConveyorEnd = false;
     public PickUp pickup;
-    public BlockCreation blockCreation;
+    public BlockCreation blockCreation1;
+    public BlockCreation blockCreation0;
     public LogicManager logicManager;
     public BinaryManager binaryManager;
 
     public bool destroying = false;
 
+    public float blockDestroyTime;
+
     // Start is called before the first frame update
     void Start()
     {
         pickup = this.GetComponent<PickUp>();
-        blockCreation = GameObject.Find("BlockGenerator0").GetComponent<BlockCreation>();
+        blockCreation0 = GameObject.Find("BlockGenerator0").GetComponent<BlockCreation>();
+        blockCreation1 = GameObject.Find("BlockGenerator1").GetComponent<BlockCreation>();
         logicManager = GameObject.Find("LogicManager").GetComponent<LogicManager>();
         binaryManager = GameObject.Find("BinaryManager").GetComponent<BinaryManager>();
     }
@@ -26,7 +30,7 @@ public class Conveyor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        blockDestroyTime = binaryManager.cpuDestroyBlockTime;
         if(onConveyor == true && pickup.hold == false)
         {
 
@@ -39,7 +43,7 @@ public class Conveyor : MonoBehaviour
             if (logicManager.coolingAmount > 1 && logicManager.energyAmount > 1) {
                 if (destroying == false)
                 {
-                    Invoke("DestroyBlock", 5);
+                    Invoke("DestroyBlock", blockDestroyTime);
                    
                     destroying = true;
                 }
@@ -99,13 +103,15 @@ public class Conveyor : MonoBehaviour
         if(parent.tag == "Block1")
         {
             binaryManager.BlockCheck(1);
+            blockCreation1.objectCount -= 1;
         }
         else
         {
             binaryManager.BlockCheck(0);
+            blockCreation0.objectCount -= 1;
         }
+
         Destroy(parent);
-        blockCreation.objectCount -= 1;
         logicManager.DecreaseCooling();
         logicManager.DecreaseEnergy();
         destroying = false;

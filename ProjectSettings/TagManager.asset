@@ -19,6 +19,9 @@ TagManager:
   - GPUMaschine
   - Block1
   - Block0
+  - CPUUpgradeMaschine
+  - CoolingUpgradeMaschine
+  - EnergyUpgradeMaschine
   layers:
   - Default
   - TransparentFX

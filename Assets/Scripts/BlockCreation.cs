@@ -14,7 +14,7 @@ public class BlockCreation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("SpawnObject", 0.0f, 2.0f);
+        InvokeRepeating("SpawnObject", 0.0f, 5.0f);
         blockArray = new GameObject[5];
     }
 
@@ -31,7 +31,7 @@ public class BlockCreation : MonoBehaviour
     {
         if (transform.position.x < 0)
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i <= 4; i++)
             {
                 if (spawned == false)
                 {
@@ -39,26 +39,31 @@ public class BlockCreation : MonoBehaviour
                     {
                         if (objectCount < 5)
                         {
-                            Instantiate(blocks[0], new Vector3(-12 + i+1, 8, 14.5f), new Quaternion(0, 0, 0, 0));
+                            blockArray[i] = Instantiate(blocks[0], new Vector3(-12 + i+1, 8, 14.5f), new Quaternion(0, 0, 0, 0));
                             objectCount++;
                             spawned = true;
+
                         }
                     }
                 }
 
             }
         }
-        else if(transform.position.x > 0)
+        if(transform.position.x > 0)
         {
-            for (int i = 0; i < 5; i++)
+           
+            for (int i = 0; i <= 4; i++)
             {
                 if (spawned == false)
                 {
+                   
                     if (blockArray[i] == null)
                     {
+                      
                         if (objectCount < 5)
                         {
-                            Instantiate(blocks[0], new Vector3(6 + i+1, 8, 14.5f), new Quaternion(0, 0, 0, 0));
+                     
+                            blockArray[i] = Instantiate(blocks[0], new Vector3(6 + i+1, 8, 14.5f), new Quaternion(0, 0, 0, 0));
                             objectCount++;
                             spawned = true;
                         }
@@ -70,37 +75,5 @@ public class BlockCreation : MonoBehaviour
 
         spawned = false;
 
-
-        foreach(GameObject gameObject in blocks)
-        {
-
-            if(gameObject == null)
-            {
-
-            }
-
-        }
-
-
-
-
-
-
-
-        if (objectCount <= 5)
-        {
-            if (transform.position.x < 0)
-            {
-                rand2 = Random.Range(-12, -5);
-                Instantiate(blocks[0], new Vector3(rand2, 8, 14.5f), new Quaternion(0, 0, 0, 0));
-                objectCount++;
-            }
-            if(transform.position.x > 0)
-            {
-                rand2 = Random.Range(6, 13);
-                Instantiate(blocks[0], new Vector3(rand2, 8, 14.5f), new Quaternion(0, 0, 0, 0));
-                objectCount++;
-            }
-        }
     }
 }

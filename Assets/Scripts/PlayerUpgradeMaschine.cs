@@ -2,13 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinManager : MonoBehaviour
+public class PlayerUpgradeMaschine : MonoBehaviour
 {
-
-    public float coins = 2;
-
-    
-
     // Start is called before the first frame update
     void Start()
     {
@@ -18,16 +13,6 @@ public class CoinManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    public void CoinsAdd(float coinCount)
-    {
-        coins += coinCount;
-    }
-
-    public void CoinsSub(float coinCount)
-    {
-        coins -= coinCount;
+        
     }
 }

@@ -12,6 +12,7 @@ public class FollowPlayerZAxis : MonoBehaviour
     public bool upwards = false;
 
     public bool lookingAtMouse = false;
+    public bool lookingAtPlayer = true;
 
 
     public float speedH = 2.0f;
@@ -43,11 +44,14 @@ public class FollowPlayerZAxis : MonoBehaviour
         //    once = false;
         //}
 
-        if(enter == true)
+        transform.position = new Vector3(0, player.transform.position.y, 0);
+
+        if (enter == true)
         {
+           
             if (upwards == false)
             {
-                transform.Rotate(-20, 0, 0);
+                transform.Rotate(-35, 0, 0);
                 enter = false;
             }
             upwards = true;
@@ -56,8 +60,11 @@ public class FollowPlayerZAxis : MonoBehaviour
         {
             if (upwards == true)
             {
-                transform.Rotate(20, 0, 0);
-                exit = false;
+                if (transform.rotation.x != 0)
+                {
+                    transform.Rotate(35, 0, 0);
+                    exit = false;
+                }
             }
             upwards = false;
         }
@@ -79,12 +86,16 @@ public class FollowPlayerZAxis : MonoBehaviour
             pitch -= speedV * Input.GetAxis("Mouse Y");
 
             transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
-
+            lookingAtPlayer = false;
         }
         else
         {
-            this.transform.rotation= new Quaternion(0, 0, 0,0);
-            transform.position = new Vector3(0, player.transform.position.y, 0);
+            if (lookingAtPlayer == false)
+            {
+                this.transform.rotation= new Quaternion(0, 0, 0,0);
+                transform.position = new Vector3(0, player.transform.position.y, 0);
+                lookingAtPlayer = true;
+            }
         }
         
     }

@@ -49,6 +49,7 @@ public class MeltBlock : MonoBehaviour
             iceCreation.iceCount -= 1;
             logicManager.AddCooling();
             Debug.Log("Was destroyed");
+            logicManager.DecreaseEnergySlightly();
         }
 
     }
