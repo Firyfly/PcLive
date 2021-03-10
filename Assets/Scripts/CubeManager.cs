@@ -49,6 +49,7 @@ public class CubeManager : MonoBehaviour
             
             smoothCameraTurning.minAngle = 0;
             smoothCameraTurning.maxAngle = -90;
+            lookAtMouse.cubeSide = 2;
             smoothCameraTurning.rotating = true;
 
 
@@ -61,7 +62,7 @@ public class CubeManager : MonoBehaviour
             playerController.moveLeft = new Vector3(0, 0, -1);
             playerController.moveRight = new Vector3(0, 0, 1);
 
-            lookAtMouse.cubeSide = 2;
+            
 
             lookAtMouse.cameraDirecton = new Vector3(1, 0, 0);
 
@@ -73,6 +74,7 @@ public class CubeManager : MonoBehaviour
 
             smoothCameraTurning.minAngle = -90;
             smoothCameraTurning.maxAngle = 0;
+            lookAtMouse.cubeSide = 1;
             smoothCameraTurning.rotating = true;
 
 
@@ -85,7 +87,7 @@ public class CubeManager : MonoBehaviour
             playerController.moveLeft = Vector3.left;
             playerController.moveRight = Vector3.right;
 
-            lookAtMouse.cubeSide = 1;
+           
 
             lookAtMouse.cameraDirecton = new Vector3(0, 0, 1);
 
@@ -97,6 +99,7 @@ public class CubeManager : MonoBehaviour
         {
             smoothCameraTurning.minAngle = 0;
             smoothCameraTurning.maxAngle = 90;
+            lookAtMouse.cubeSide = 3;
             smoothCameraTurning.rotating = true;
 
 
@@ -110,7 +113,7 @@ public class CubeManager : MonoBehaviour
             playerController.moveLeft = new Vector3(0, 0, 1);
             playerController.moveRight = new Vector3(0, 0, -1);
 
-            lookAtMouse.cubeSide = 3;
+           
 
             lookAtMouse.cameraDirecton = new Vector3(1, 0, 0);
         }
@@ -119,6 +122,7 @@ public class CubeManager : MonoBehaviour
         {
             smoothCameraTurning.minAngle = 90;
             smoothCameraTurning.maxAngle = 0;
+            lookAtMouse.cubeSide = 1;
             smoothCameraTurning.rotating = true;
 
 
@@ -132,7 +136,7 @@ public class CubeManager : MonoBehaviour
             playerController.moveLeft = Vector3.left;
             playerController.moveRight = Vector3.right;
 
-            lookAtMouse.cubeSide = 1;
+           
 
             lookAtMouse.cameraDirecton = new Vector3(0, 0, 1);
         }
@@ -148,24 +152,59 @@ public class CubeManager : MonoBehaviour
 
         if (other.tag == "SlopeOneFour")
         {
+            smoothCameraTurning.minAngle = 0;
+            smoothCameraTurning.maxAngle = 90;
+            lookAtMouse.cubeSide = 4;
+            smoothCameraTurning.rotating = true;
 
-            mainLight.transform.position = new Vector3(mainLight.transform.position.x, 70, mainLight.transform.position.z);
+            mainLight.transform.Rotate(90, 0, 0);
 
-            player.transform.position = new Vector3(0, 86, 14);
+            player.transform.position = new Vector3(0, 6, 10);
 
-            lookAtMouse.cubeSide = 1;
+            playerController.moveLeft = Vector3.left;
+            playerController.moveRight = Vector3.right;
+            playerController.moveUp = Vector3.forward;
+            playerController.moveDown = -Vector3.forward;
 
+            lookAtMouse.cameraDirecton = new Vector3(0, 0, -1);
         }
 
 
         if (other.tag == "SlopeFourOne")
         {
-
-            mainLight.transform.position = new Vector3(mainLight.transform.position.x, 20, mainLight.transform.position.z);
-
-            player.transform.position = new Vector3(0, 8, 14);
-
+            smoothCameraTurning.minAngle = 0;
+            smoothCameraTurning.maxAngle = 90;
             lookAtMouse.cubeSide = 1;
+            smoothCameraTurning.rotating = true;
+
+            mainLight.transform.Rotate(-90, 0, 0);
+
+            player.transform.position = new Vector3(0, 7.5f, 14);
+
+            playerController.moveLeft = Vector3.left;
+            playerController.moveRight = Vector3.right;
+            
+
+            lookAtMouse.cameraDirecton = new Vector3(0, 0, 1);
+        }
+
+
+
+
+
+
+        if (other.tag == "SlopeOneFive")
+        {
+
+
+
+        }
+
+
+        if (other.tag == "SlopeFiveOne")
+        {
+
+
 
         }
 

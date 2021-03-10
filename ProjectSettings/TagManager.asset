@@ -22,6 +22,8 @@ TagManager:
   - CPUUpgradeMaschine
   - CoolingUpgradeMaschine
   - EnergyUpgradeMaschine
+  - SlopeOneFive
+  - SlopeFiveOne
   layers:
   - Default
   - TransparentFX

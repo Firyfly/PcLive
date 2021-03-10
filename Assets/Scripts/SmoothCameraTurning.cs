@@ -15,60 +15,88 @@ public class SmoothCameraTurning : MonoBehaviour
     public float lerpTime = 1.2f;
     static float t = 0.0f;
 
+    public LookAtMouse lookAtMouse;
+
     private void Start()
     {
-        
+        lookAtMouse = GameObject.Find("Player").GetComponent<LookAtMouse>();
     }
 
     void Update()
     {
-    
 
 
 
-        if (rotating == true)
+        if (lookAtMouse.cubeSide == 1 || lookAtMouse.cubeSide == 2 || lookAtMouse.cubeSide == 3)
         {
-
-
-            float angle = Mathf.LerpAngle(minAngle, maxAngle, t);
-            transform.eulerAngles = new Vector3(0, angle, 0);
-
-            t += lerpTime * Time.deltaTime;
-        
-
-            if (t >= 1.0f)
+            if (rotating == true)
             {
-                rotating = false;
-                t = 0;
+
+
+                float angle = Mathf.LerpAngle(minAngle, maxAngle, t);
+                transform.eulerAngles = new Vector3(0, angle, 0);
+
+                t += lerpTime * Time.deltaTime;
+
+
+                if (t >= 1.0f)
+                {
+                    rotating = false;
+                    t = 0;
+                }
+
             }
-            
+        }
+        if (lookAtMouse.cubeSide == 4 || lookAtMouse.cubeSide == 5)
+        {
+            if (rotating == true)
+            {
+
+
+                float angle = Mathf.LerpAngle(minAngle, maxAngle, t);
+                transform.eulerAngles = new Vector3(angle, 0, 0);
+
+                t += lerpTime * Time.deltaTime;
+
+
+                if (t >= 1.0f)
+                {
+                    rotating = false;
+                    t = 0;
+                }
+
+            }
         }
 
 
 
 
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    minAngle = 0.0f;
-        //    maxAngle = 90.0f;
-        //    rotating = true;
-        //}
-        //if (Input.GetKeyDown(KeyCode.Q))
-        //{
-        //    minAngle = 40;
-        //    maxAngle = -90f;
-        //    rotating = true;
-        //}
-        //if (rotating == true)
-        //{
-        //    float angle = Mathf.LerpAngle(minAngle, maxAngle, Time.time/1.5f);
-        //    transform.eulerAngles = new Vector3(0, angle, 0);
-        //    if(angle == maxAngle)
-        //    {
-        //        rotating = false;
-        //    }
-        //}
-    }
+
+
+
+
+            //if (Input.GetKeyDown(KeyCode.E))
+            //{
+            //    minAngle = 0.0f;
+            //    maxAngle = 90.0f;
+            //    rotating = true;
+            //}
+            //if (Input.GetKeyDown(KeyCode.Q))
+            //{
+            //    minAngle = 40;
+            //    maxAngle = -90f;
+            //    rotating = true;
+            //}
+            //if (rotating == true)
+            //{
+            //    float angle = Mathf.LerpAngle(minAngle, maxAngle, Time.time/1.5f);
+            //    transform.eulerAngles = new Vector3(0, angle, 0);
+            //    if(angle == maxAngle)
+            //    {
+            //        rotating = false;
+            //    }
+            //}
+        }
 
 
     //public void TurnSmooth(float min, float max)

@@ -17,6 +17,10 @@ public class LogicManager : MonoBehaviour
 
     public CoinManager coinManager;
 
+    public float addCoolingAmount = 5;
+
+    public float addEnergyAmount = 60;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -112,7 +116,7 @@ public class LogicManager : MonoBehaviour
     {
         if (coolingAmount < coolingMaximum-5)
         {
-            coolingAmount += 5;
+            coolingAmount += addCoolingAmount;
         }
         else
         {

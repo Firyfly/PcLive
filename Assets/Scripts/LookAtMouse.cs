@@ -43,6 +43,20 @@ public class LookAtMouse : MonoBehaviour
                                                                 mouse.y,
                                                                  player.transform.position.x));
         }
+        if (cubeSide == 4)
+        {
+            mouseWorld = Camera.main.ScreenToWorldPoint(new Vector3(
+                                                                mouse.x,
+                                                                mouse.y,
+                                                                 Camera.main.nearClipPlane));
+        }
+        if (cubeSide == 5)
+        {
+            mouseWorld = Camera.main.ScreenToWorldPoint(new Vector3(
+                                                                mouse.x,
+                                                                mouse.y,
+                                                                 player.transform.position.z));
+        }
 
         Vector3 forward = mouseWorld - player.transform.position;
         player.transform.rotation = Quaternion.LookRotation(forward, cameraDirecton);

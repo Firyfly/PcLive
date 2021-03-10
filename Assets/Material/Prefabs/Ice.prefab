@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 581423b279bc8d8429faf9df64e021ef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -126,6 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   holdDestination: {fileID: 0}
   hold: 0
+  meltBlock: {fileID: 0}
 --- !u!114 &1349844330971315468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,5 +146,5 @@ MonoBehaviour:
   iceCreation: {fileID: 0}
   logicManager: {fileID: 0}
   cooler: {fileID: 0}
-  coolerObject: {fileID: 0}
   child: {fileID: 1349844330971315571}
+  isParent: 0

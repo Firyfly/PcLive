@@ -23,6 +23,9 @@ public class FollowPlayerZAxis : MonoBehaviour
 
     public LookAtMouse lookAtMouse;
 
+    public bool horizontal = true;
+    public bool vertical = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,30 +50,44 @@ public class FollowPlayerZAxis : MonoBehaviour
         //    once = false;
         //}
 
-        transform.position = new Vector3(0, player.transform.position.y, 0);
+        if (lookAtMouse.cubeSide == 1 || lookAtMouse.cubeSide == 2 || lookAtMouse.cubeSide == 3)
+        {
+            //if(horizontal == false)
+            //{
+            //    transform.position = new Vector3(0, player.transform.position.y, 0);
+            //    horizontal = true;
+            //}
+            transform.position = new Vector3(0, player.transform.position.y, 0);
+        }
+        if (lookAtMouse.cubeSide == 4 || lookAtMouse.cubeSide == 4)
+        {
+            transform.position = new Vector3(0, 25, player.transform.position.z);
+        }
 
-        if (enter == true)
-        {
+
+
+        //if (enter == true)
+        //{
            
-            if (upwards == false)
-            {
-                transform.Rotate(-35, 0, 0);
-                enter = false;
-            }
-            upwards = true;
-        }
-        if (exit == true)
-        {
-            if (upwards == true)
-            {
-                if (transform.rotation.x != 0)
-                {
-                    transform.Rotate(35, 0, 0);
-                    exit = false;
-                }
-            }
-            upwards = false;
-        }
+        //    if (upwards == false)
+        //    {
+        //        transform.Rotate(-35, 0, 0);
+        //        enter = false;
+        //    }
+        //    upwards = true;
+        //}
+        //if (exit == true)
+        //{
+        //    if (upwards == true)
+        //    {
+        //        if (transform.rotation.x != 0)
+        //        {
+        //            transform.Rotate(35, 0, 0);
+        //            exit = false;
+        //        }
+        //    }
+        //    upwards = false;
+        //}
 
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -101,14 +118,32 @@ public class FollowPlayerZAxis : MonoBehaviour
                 }
                 if (lookAtMouse.cubeSide == 2)
                 {
-                    Debug.Log(this.transform.rotation.y);
                     this.transform.rotation = new Quaternion(0, -0.5f, 0, 0.5f);
                 }
                 if (lookAtMouse.cubeSide == 3)
                 {
                     this.transform.rotation = new Quaternion(0, 0.5f, 0, 0.5f);
                 }
-                transform.position = new Vector3(0, player.transform.position.y, 0);
+                if (lookAtMouse.cubeSide == 4)
+                {
+                    this.transform.rotation = new Quaternion(0.5f, 0, 0, 0.5f);
+                }
+                if (lookAtMouse.cubeSide == 5)
+                {
+                    this.transform.rotation = new Quaternion(-0.5f, 0, 0, 0.5f);
+                }
+
+
+                if (lookAtMouse.cubeSide == 1 || lookAtMouse.cubeSide == 2 || lookAtMouse.cubeSide == 3)
+                {
+                    transform.position = new Vector3(0, player.transform.position.y, 0);
+                }
+                if (lookAtMouse.cubeSide == 4 || lookAtMouse.cubeSide == 4)
+                {
+                    transform.position = new Vector3(0, 25, player.transform.position.z);
+                }
+
+
                 lookingAtPlayer = true;
             }
         }

@@ -11,11 +11,51 @@ public class EnergyUpgradeMaschine : MonoBehaviour
 
     public CoinManager coinManager;
 
+    public GameObject[] blocks;
+
+    public LogicManager logicManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        logicManager = GameObject.Find("LogicManager").GetComponent<LogicManager>();
 
         coinManager = GameObject.Find("CoinManager").GetComponent<CoinManager>();
+
+        if (PlayerPrefs.GetInt("UpgradeLevelEnergy") == 1)
+        {
+            upgradeLevel = 1;
+            blocks[0].SetActive(true);
+            logicManager.addEnergyAmount = 70;
+        }
+        else if (PlayerPrefs.GetInt("UpgradeLevelEnergy") == 2)
+        {
+            upgradeLevel = 2;
+            blocks[1].SetActive(true);
+            logicManager.addEnergyAmount = 80;
+        }
+        else if (PlayerPrefs.GetInt("UpgradeLevelEnergy") == 3)
+        {
+            upgradeLevel = 3;
+            blocks[2].SetActive(true);
+            logicManager.addEnergyAmount = 90;
+        }
+        else if (PlayerPrefs.GetInt("UpgradeLevelEnergy") == 4)
+        {
+            upgradeLevel = 4;
+            blocks[3].SetActive(true);
+            logicManager.addEnergyAmount = 100;
+        }
+        else if (PlayerPrefs.GetInt("UpgradeLevelEnergy") == 5)
+        {
+            upgradeLevel = 5;
+            blocks[4].SetActive(true);
+            logicManager.addEnergyAmount = 110;
+        }
+        else
+        {
+            upgradeLevel = 0;
+        }
     }
 
     // Update is called once per frame
@@ -33,9 +73,11 @@ public class EnergyUpgradeMaschine : MonoBehaviour
                 if (coinManager.coins >= upgradeCost)
                 {
                     coinManager.coins -= upgradeCost;
-
+                    logicManager.addEnergyAmount = 70;
                     upgradeCost = 20;
                     upgradeLevel += 1;
+                    PlayerPrefs.SetInt("UpgradeLevelEnergy", 1);
+                    blocks[0].SetActive(true);
                 }
                 break;
 
@@ -44,9 +86,11 @@ public class EnergyUpgradeMaschine : MonoBehaviour
                 if (coinManager.coins >= upgradeCost)
                 {
                     coinManager.coins -= upgradeCost;
-
+                    logicManager.addEnergyAmount = 80;
                     upgradeCost = 30;
                     upgradeLevel += 1;
+                    PlayerPrefs.SetInt("UpgradeLevelEnergy", 2);
+                    blocks[1].SetActive(true);
                 }
                 break;
 
@@ -55,9 +99,11 @@ public class EnergyUpgradeMaschine : MonoBehaviour
                 if (coinManager.coins >= upgradeCost)
                 {
                     coinManager.coins -= upgradeCost;
-
+                    logicManager.addEnergyAmount = 90;
                     upgradeCost = 40;
                     upgradeLevel += 1;
+                    PlayerPrefs.SetInt("UpgradeLevelEnergy", 3);
+                    blocks[2].SetActive(true);
                 }
                 break;
 
@@ -66,9 +112,11 @@ public class EnergyUpgradeMaschine : MonoBehaviour
                 if (coinManager.coins >= upgradeCost)
                 {
                     coinManager.coins -= upgradeCost;
-
+                    logicManager.addEnergyAmount = 100;
                     upgradeCost = 50;
                     upgradeLevel += 1;
+                    PlayerPrefs.SetInt("UpgradeLevelEnergy", 4);
+                    blocks[3].SetActive(true);
                 }
                 break;
 
@@ -77,9 +125,11 @@ public class EnergyUpgradeMaschine : MonoBehaviour
                 if (coinManager.coins >= upgradeCost)
                 { 
                     coinManager.coins -= upgradeCost;
-
+                    logicManager.addEnergyAmount = 110;
                     upgradeCost = 60;
                     upgradeLevel += 1;
+                    PlayerPrefs.SetInt("UpgradeLevelEnergy", 5);
+                    blocks[4].SetActive(true);
                 }
                 break;
 
