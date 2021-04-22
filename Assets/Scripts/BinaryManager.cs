@@ -15,29 +15,35 @@ public class BinaryManager : MonoBehaviour
     public Material green0;
     public Material red0;
 
-    private int[] binary;
+    public ParticleSystem correctParticles;
 
+    private int[] binary;
     public bool generated = false;
     public bool initialised = false;
 
     public int currentCheckBlock = 0;
-
-    public CoinManager coinManager;
-
+    
     public float cpuCoinReward = 5;
     public float cpuDestroyBlockTime = 5;
+
+    public float ScrollX = 0.0f;
+    public float ScrollY = -0.5f;
+   
+    public CoinManager coinManager;
+    public SoundManager soundManager;
 
     // Start is called before the first frame update
     void Start()
     {
         binary = new int[4];
         coinManager = GameObject.Find("CoinManager").GetComponent<CoinManager>();
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //Generiere Reihenfolge von 0 und 1
         if(generated == false)
         {
             for(int i = 0; i <= 3; i++)
@@ -49,7 +55,7 @@ public class BinaryManager : MonoBehaviour
             generated = true;
         }
 
-
+        //Setze die Materialien auf Standart wenn nicht bereits generiert, Grau
         if(generated == true)
         {
 
@@ -95,21 +101,13 @@ public class BinaryManager : MonoBehaviour
             }
 
 
-
-
-
-
-
-
-
-
-
-
         }
 
 
-
-
+        //Scrolls das tiling von Laufband
+        float OffsetX = Time.time * ScrollX;
+        float OffsetY = Time.time * ScrollY;
+        GameObject.Find("Conveyor0").GetComponent<Renderer>().material.mainTextureOffset = new Vector2(OffsetX, OffsetY);
 
     }
 
@@ -117,16 +115,16 @@ public class BinaryManager : MonoBehaviour
 
 
 
-
+    //Überprüft ob die abgegebene Blocknummer die richtige ist
     public void BlockCheck(int binaryNumber)
     {
-
+        //Die Zahlen stimmen überein
         if (binary[currentCheckBlock] == binaryNumber)
         {
             if (binary[currentCheckBlock] == 0)
             {
                 places[currentCheckBlock].GetComponent<Renderer>().material = green0;
-                Debug.Log("KommtRein");
+               
             }
             else
             {
@@ -135,17 +133,20 @@ public class BinaryManager : MonoBehaviour
 
             if (currentCheckBlock == 3)
             {
-                //Ende der Check und reset
+                
                 Invoke("ResetBinaries", 1f);
-                coinManager.coins += cpuCoinReward;
-
+                coinManager.CoinsAdd(cpuCoinReward);
+                soundManager.PlayCoin();
+                correctParticles.Play();
 
             }
             else
             {
                 currentCheckBlock += 1;
             }
-        }
+
+            soundManager.PlayCorrect();
+        }//Die Zahlen stimmen nicht überein
         else if (binary[currentCheckBlock] != binaryNumber)
         {
             for (int i = 0; i <= 3; i++)
@@ -162,10 +163,12 @@ public class BinaryManager : MonoBehaviour
 
             Invoke("ResetBinaries", 1f);
 
+            soundManager.PlayWrong();
 
         }
     } 
 
+    //Resettet alle Variablen
     void ResetBinaries()
     {
         generated = false;

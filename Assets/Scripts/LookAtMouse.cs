@@ -6,21 +6,24 @@ public class LookAtMouse : MonoBehaviour
 {
 
     public GameObject player;
+
     public Vector3 cameraDirecton = Vector3.forward;
-    public float cubeSide = 1;
     public Vector3 mouseWorld;
 
+    public float cubeSide = 1;
+    public bool vertical = false;
 
-    // Start is called before the first frame update
+
+
+   
     void Start()
     {
         player = GameObject.Find("Player");
     }
 
-    // Update is called once per frame
     void Update()
     {
-
+        //Passt den Vector abhängig von der Seite auf welcher der Spieler ist an
         Vector3 mouse = Input.mousePosition;
         if (cubeSide == 1)
         {
@@ -58,22 +61,9 @@ public class LookAtMouse : MonoBehaviour
                                                                  player.transform.position.z));
         }
 
+        //Setzt die Rotierung auf den Spieler um
         Vector3 forward = mouseWorld - player.transform.position;
         player.transform.rotation = Quaternion.LookRotation(forward, cameraDirecton);
-
-
-
-
-        //Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //float midPoint = (transform.position - Camera.main.transform.position).magnitude * 0.5f;
-
-        //transform.LookAt(mouseRay.origin + mouseRay.direction * midPoint);
-
-
-        //var direction = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-        //var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
 
     }
 }

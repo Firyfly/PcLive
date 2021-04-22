@@ -29,6 +29,7 @@ public class BlockCreation : MonoBehaviour
 
     public void SpawnObject()
     {
+        //Spawnt Blöcke für die erste Maschine
         if (transform.position.x < 0)
         {
             for (int i = 0; i <= 4; i++)
@@ -48,8 +49,8 @@ public class BlockCreation : MonoBehaviour
                 }
 
             }
-        }
-        if(transform.position.x > 0)
+        }//Spawnt Blöcke für die zweite Maschine
+        if (transform.position.x > 0)
         {
            
             for (int i = 0; i <= 4; i++)

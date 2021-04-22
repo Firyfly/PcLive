@@ -5,16 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-
+    //Läd die Hauptscene
     public void PlayGame()
     {
         SceneManager.LoadScene("PcLive");
-
     }
 
+    //Schließt das Spiel
     public void QuitGame()
     {
-        Debug.Log("QUIT!");
         Application.Quit();
     }
 

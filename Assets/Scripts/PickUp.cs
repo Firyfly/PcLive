@@ -5,11 +5,12 @@ using UnityEngine;
 public class PickUp : MonoBehaviour
 {
     public Transform holdDestination;
+
     public bool hold = false;
+
     public MeltBlock meltBlock;
+    public SoundManager soundManager;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         holdDestination = GameObject.Find("Player").transform.Find("HoldDestination");
@@ -17,9 +18,9 @@ public class PickUp : MonoBehaviour
         {
             meltBlock = this.GetComponent<MeltBlock>();
         }
+        soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -27,6 +28,7 @@ public class PickUp : MonoBehaviour
 
     void OnMouseDown()
     {
+        //Wenn Spieler auf das Eis klickt, dann wird dies zum Kind des Spielercharakters
         if (this.tag == "Ice")
         {
             if (meltBlock.onTrigger == true)
@@ -37,18 +39,22 @@ public class PickUp : MonoBehaviour
             }
         }
 
+        //Bringt das Eis zur "HoldPosition" beim Spielercharakter
         this.transform.position = holdDestination.position;
         this.transform.parent = GameObject.Find("HoldDestination").transform;
         hold = true;
 
+        soundManager.PlayBoxPickUp();
 
     }
 
     void OnMouseUp()
     {
-
+        //Lässt der Spieler los, dann wird der Spielercharakter als Elternobjekt gelöscht
         hold = false;
         this.transform.parent = null;
+
+        soundManager.PlayDropBox();
 
     }
 

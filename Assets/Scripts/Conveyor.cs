@@ -7,15 +7,17 @@ public class Conveyor : MonoBehaviour
     public GameObject parent;
     public bool onConveyor = false;
     public bool onConveyorEnd = false;
-    public PickUp pickup;
-    public BlockCreation blockCreation1;
-    public BlockCreation blockCreation0;
-    public LogicManager logicManager;
-    public BinaryManager binaryManager;
-
     public bool destroying = false;
 
     public float blockDestroyTime;
+    public float blockResetTime = 30;
+
+    public PickUp pickup;
+    public LogicManager logicManager;
+    public BinaryManager binaryManager;
+    public BlockCreation blockCreation1;
+    public BlockCreation blockCreation0;
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,16 +33,16 @@ public class Conveyor : MonoBehaviour
     void Update()
     {
         blockDestroyTime = binaryManager.cpuDestroyBlockTime;
-        if(onConveyor == true && pickup.hold == false)
+        if(onConveyor == true && pickup.hold == false)//Wenn Block auf dem Laufband, bewege es nach oben
         {
 
             this.GetComponent<Rigidbody>().AddForce(0, 1, 0, ForceMode.Force);
 
         }
-        if(onConveyorEnd == true)
+        if(onConveyorEnd == true)//Wenn Block am Ende vom Laufband, höre auf ihn zu bewegen und zerstöre ihn 
         {
            
-            if (logicManager.coolingAmount > 1 && logicManager.energyAmount > 1) {
+            if (logicManager.coolingAmount > 20 && logicManager.energyAmount > 15) {
                 if (destroying == false)
                 {
                     Invoke("DestroyBlock", blockDestroyTime);
@@ -51,10 +53,15 @@ public class Conveyor : MonoBehaviour
             }
         }
 
-
-        //If bool convey true and hold(this.getcomponent.pickup) is false
-        //Then test rigidbody constant force
-
+        //Timer fürs zerstören von Blöcken
+        if (blockResetTime >= 0)
+        {
+            blockResetTime -= Time.deltaTime;
+        }
+        else
+        {
+            Destroy(parent);
+        }
 
     }
 
@@ -100,6 +107,7 @@ public class Conveyor : MonoBehaviour
 
     public void DestroyBlock()
     {
+        //Übergebe den 0 oder 1 wert an den BinaryManager
         if(parent.tag == "Block1")
         {
             binaryManager.BlockCheck(1);
@@ -111,6 +119,7 @@ public class Conveyor : MonoBehaviour
             blockCreation0.objectCount -= 1;
         }
 
+        //Zieht Energie und Kühlung ab
         Destroy(parent);
         logicManager.DecreaseCooling();
         logicManager.DecreaseEnergy();
@@ -127,11 +136,6 @@ public class Conveyor : MonoBehaviour
 
 
 
-    //On trigger enter, set bool true das convey nach oben, other.tag conveyor
-    //when der trigger conveyorEnd ist, dann destroy after 5 seconds, das dauert, durch collision kommen nicht alle hinternander dann dran
-
-
-    //On trigger exit, set this bool false
 
 
 

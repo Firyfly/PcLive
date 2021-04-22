@@ -7,22 +7,21 @@ public class ManualProgressbar : MonoBehaviour
     public GameObject[] energySpheres;
     public GameObject[] coolingSpheres;
 
-    public LogicManager logicManager;
-
     public Material grey;
     public Material blue;
     public Material yellow;
 
-    // Start is called before the first frame update
+    public LogicManager logicManager;
+
     void Start()
     {
         logicManager = GameObject.Find("LogicManager").GetComponent<LogicManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (logicManager.energyAmount / logicManager.energyMaximum > 1.0f)
+        //Setzt die Materialien der Lichter passend zur Energie
+        if (logicManager.energyAmount / logicManager.energyMaximum > 0.95f)
         {
             energySpheres[0].GetComponent<Renderer>().material = yellow;
             energySpheres[0].transform.Find("Light").gameObject.SetActive(true);
@@ -35,7 +34,7 @@ public class ManualProgressbar : MonoBehaviour
             energySpheres[4].GetComponent<Renderer>().material = yellow;
             energySpheres[4].transform.Find("Light").gameObject.SetActive(true);
         }
-        if (logicManager.energyAmount/logicManager.energyMaximum < 1.0f && logicManager.energyAmount / logicManager.energyMaximum > 0.8f)
+        if (logicManager.energyAmount/logicManager.energyMaximum < 0.95f && logicManager.energyAmount / logicManager.energyMaximum > 0.8f)
         {
             energySpheres[0].GetComponent<Renderer>().material = yellow;
             energySpheres[0].transform.Find("Light").gameObject.SetActive(true);
@@ -102,12 +101,8 @@ public class ManualProgressbar : MonoBehaviour
         }
 
 
-
-
-
-
-
-        if (logicManager.coolingAmount / logicManager.coolingMaximum > 1.0f)
+        //Setzt die Materialien der Lichter passend zur Kühlung
+        if (logicManager.coolingAmount / logicManager.coolingMaximum > 0.95f)
         {
             coolingSpheres[0].GetComponent<Renderer>().material = blue;
             coolingSpheres[0].transform.Find("Light").gameObject.SetActive(true);
@@ -122,7 +117,7 @@ public class ManualProgressbar : MonoBehaviour
 
         }
 
-        if (logicManager.coolingAmount / logicManager.coolingMaximum < 1.0f && logicManager.coolingAmount / logicManager.coolingMaximum > 0.8f)
+        if (logicManager.coolingAmount / logicManager.coolingMaximum < 0.95f && logicManager.coolingAmount / logicManager.coolingMaximum > 0.8f)
         {
             coolingSpheres[0].GetComponent<Renderer>().material = blue;
             coolingSpheres[0].transform.Find("Light").gameObject.SetActive(true);
@@ -188,12 +183,6 @@ public class ManualProgressbar : MonoBehaviour
             coolingSpheres[4].GetComponent<Renderer>().material = grey;
             coolingSpheres[4].transform.Find("Light").gameObject.SetActive(false);
         }
-
-
-
-
-
-
 
     }
 }

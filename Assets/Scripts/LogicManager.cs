@@ -15,53 +15,40 @@ public class LogicManager : MonoBehaviour
     public bool enoughEnergy = true;
     public bool enoughHeat = true;
 
-    public CoinManager coinManager;
-
     public float addCoolingAmount = 5;
-
     public float addEnergyAmount = 60;
 
-    // Start is called before the first frame update
+    public CoinManager coinManager;
+
     void Start()
     {
-
+        //Wenn es das erstmalige Starten ist, dann setze den die Startmenge
         if (PlayerPrefs.GetInt("Once") == 0)
         {
             coolingAmount = 30;
             energyAmount = 30;
             PlayerPrefs.SetInt("Once", 1);
         }
-        else
+        else//Nach dem ersten starten wird der letzte Wert aus dem Prefab geladen
         {
             coolingAmount = PlayerPrefs.GetFloat("Cooling");
             energyAmount = PlayerPrefs.GetFloat("Energy");
         }
 
-
-        InvokeRepeating("DecreaseEnergySlightly", 5f, 10f);
-        InvokeRepeating("AddCoolingSlightly", 5f, 1f);
+        //Invoke die wiederholenden Funktionen
+        InvokeRepeating("DecreaseEnergySlightly", 5f, 20f);
+        InvokeRepeating("AddCoolingSlightly", 5f, 4f);
         InvokeRepeating("SaveStatesOfLogic", 5f, 10f);
 
         coinManager = GameObject.Find("CoinManager").GetComponent<CoinManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
-
-
-
-
-
-
-
-
-
 
     }
 
-
+    //Sinkt leicht die Energie
     public void DecreaseEnergySlightly()
     {
         if (energyAmount > 0)
@@ -74,12 +61,13 @@ public class LogicManager : MonoBehaviour
         }
     }
 
+    //Sinkt die Energie
     public void DecreaseEnergy()
     {
 
         if (energyAmount > 0)
         {
-            energyAmount -= 5;
+            energyAmount -= 15;
         }
         else
         {
@@ -88,6 +76,7 @@ public class LogicManager : MonoBehaviour
 
     }
 
+    //Steigert die Energie
     public void AddEnergy()
     {
         if (energyAmount < energyMaximum - 60)
@@ -100,11 +89,12 @@ public class LogicManager : MonoBehaviour
         }
     }
 
+    //Senkt die Kühlung
     public void DecreaseCooling()
     {
         if (coolingAmount > 0)
         {
-            coolingAmount -= 5;
+            coolingAmount -= 20;
         }
         else
         {
@@ -112,6 +102,7 @@ public class LogicManager : MonoBehaviour
         }
     }
 
+    //Steigert die Kühlung
     public void AddCooling()
     {
         if (coolingAmount < coolingMaximum-5)
@@ -125,6 +116,7 @@ public class LogicManager : MonoBehaviour
 
     }
 
+    //Steigert die Kühlung leicht
     public void AddCoolingSlightly()
     {
         if (coolingAmount < coolingMaximum -0.25f)
@@ -138,11 +130,11 @@ public class LogicManager : MonoBehaviour
 
     }
 
+    //Speichert die Werte
     public void SaveStatesOfLogic()
     {
         PlayerPrefs.SetFloat("Energy",energyAmount);
         PlayerPrefs.SetFloat("Cooling",coolingAmount);
-        PlayerPrefs.SetFloat("BitCoins",coinManager.coins);
     }
 
 
